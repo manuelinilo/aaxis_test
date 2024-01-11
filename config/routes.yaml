@@ -1,0 +1,25 @@
+getProducts:
+    path: /products
+    methods: [GET]
+    controller: App\Controller\ProductController::index
+
+getProduct:
+    path: /products/{sku}
+    methods: [GET]
+    controller: App\Controller\ProductController::show
+
+createProduct:
+    path: /products
+    methods: [POST]
+    controller: App\Controller\ProductController::create
+
+updateProducts:
+    path: /products
+    methods: [PUT]
+    controller: App\Controller\ProductController::update
+
+updateProduct:
+    path: /products/{sku}
+    methods: [PUT]
+    controller: App\Controller\ProductController::updateOne
+
