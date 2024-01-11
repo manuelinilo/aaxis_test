@@ -1,6 +1,13 @@
 {
+    "name": "manuelinilo/aaxis_test",
     "type": "project",
     "license": "proprietary",
+    "authors": [
+        {
+            "name": "Manuel Inilo",
+            "email": "manuel.inilo@gmail.com"
+        }
+    ],
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
@@ -34,12 +41,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "AaxisTest\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "AaxisTest\\Tests\\": "tests/"
         }
     },
     "replace": {

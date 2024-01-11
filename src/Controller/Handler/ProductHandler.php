@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller\Handler;
+namespace AaxisTest\Controller\Handler;
 
-use App\Entity\Product;
-use App\Exception\InvalidEntityException;
-use App\Exception\InvalidRequestException;
+use AaxisTest\Entity\Product;
+use AaxisTest\Exception\InvalidEntityException;
+use AaxisTest\Exception\InvalidRequestException;
 use Particle\Validator\Failure;
 use Particle\Validator\Validator;
 
@@ -22,23 +22,7 @@ class ProductHandler
     {
         $products = [];
         foreach ($data as $productData) {
-            $validator = new Validator();
-            $validator->required('sku')->string()->lengthBetween(1, 50);
-            $validator->required('product_name')->string()->lengthBetween(1, 250);
-            $validator->optional('description')->string()->allowEmpty(false);
-
-            $result = $validator->validate($productData);
-
-            if ($result->isNotValid()) {
-                throw new InvalidRequestException($result->getFailures(), $productData['sku']);
-            }
-
-            $product = new Product();
-            $product->setSku($productData['sku']);
-            $product->setProductName($productData['product_name']);
-            $product->setDescription($productData['description'] ?? null);
-
-            $products[] = $product;
+            $products[] = $this->validateInput($productData);
         }
 
         return $products;
@@ -49,41 +33,10 @@ class ProductHandler
      */
     public function fromInput(array $data): Product
     {
-        $validator = new Validator();
-        $validator->required('sku')->string()->lengthBetween(1, 50);
-        $validator->required('product_name')->string()->lengthBetween(1, 250);
-        $validator->optional('description')->string()->allowEmpty(false);
-
-        $result = $validator->validate($data);
-
-        if ($result->isNotValid()) {
-            throw new InvalidRequestException($result->getFailures());
-        }
-
-        $product = new Product();
-        $product->setSku($data['sku']);
-        $product->setProductName($data['product_name']);
-        $product->setDescription($data['description'] ?? null);
-
-        return $product;
+        return $this->validateInput($data);
     }
 
-    public function toErrorOutput(array $errors): array
-    {
-        $outputErrors = [];
-
-        /** @var Failure $error */
-        foreach ($errors as $error) {
-            $outputErrors[] = [
-                'field' => $error->getKey(),
-                'reason' => $error->format(),
-            ];
-        }
-
-        return $outputErrors;
-    }
-
-    public function toOutputFromException(\Exception $exception): array
+    public function toOutputFromException(\Throwable $exception): array
     {
 
         if ($exception instanceof(InvalidRequestException::class)) {
@@ -120,8 +73,6 @@ class ProductHandler
         /** @var Product $product */
         foreach ($products as $product) {
             $jsonData[] = [
-                // remove after development
-                'id' => $product->getId(),
                 'sku' => $product->getSku(),
                 'product_name' => $product->getProductName(),
                 'description' => $product->getDescription(),
@@ -129,6 +80,27 @@ class ProductHandler
         }
 
         return json_encode($jsonData);
+    }
+
+    private function validateInput(array $input): Product
+    {
+        $validator = new Validator();
+        $validator->required('sku')->string()->lengthBetween(1, 50);
+        $validator->required('product_name')->string()->lengthBetween(1, 250);
+        $validator->optional('description')->string()->allowEmpty(false);
+
+        $result = $validator->validate($input);
+
+        if ($result->isNotValid()) {
+            throw new InvalidRequestException($result->getFailures(), $input['sku']);
+        }
+
+        $product = new Product();
+        $product->setSku($input['sku']);
+        $product->setProductName($input['product_name']);
+        $product->setDescription($input['description'] ?? null);
+
+        return $product;
     }
 
 }

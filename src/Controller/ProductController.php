@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace AaxisTest\Controller;
 
-use App\Controller\Handler\ProductHandler;
-use App\Service\ProductService;
+use AaxisTest\Controller\Handler\ProductHandler;
+use AaxisTest\Service\ProductService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

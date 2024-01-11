@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace AaxisTest\Repository;
 
-use App\Entity\Product;
+use AaxisTest\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

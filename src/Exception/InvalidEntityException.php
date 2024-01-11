@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Exception;
-
-use Particle\Validator\Failure;
+namespace AaxisTest\Exception;
 
 class InvalidEntityException extends \Exception
 {
