@@ -21,7 +21,7 @@ To change the database connection, you need to edit ***.env*** file with your us
 DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
 ```
 
-- To run migrations:
+To run migrations:
 
 ```bash
 php bin/console doctrine:migrations:migrate
@@ -38,6 +38,12 @@ symfony serve
 
 ```bash
 php bin/console cache:clear
+```
+
+- To run unit tests
+
+```bash
+vendor/bin/phpunit
 ```
 
 
