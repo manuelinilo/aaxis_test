@@ -42,10 +42,7 @@ class ProductHandler
         if ($exception instanceof(InvalidRequestException::class)) {
             $outputErrors = [];
 
-            /**
-             * @var Failure $error
-             * @var InvalidRequestException $exception
-             */
+            /** @var Failure $error */
             foreach ($exception->getErrors() as $error) {
                 $outputErrors['error'] = [
                     'sku' => $exception->getIdentifier(),
@@ -66,7 +63,7 @@ class ProductHandler
 
     }
 
-    public function toJson(array $products): string
+    public function toJson(array $products): string|false
     {
         $jsonData = [];
 

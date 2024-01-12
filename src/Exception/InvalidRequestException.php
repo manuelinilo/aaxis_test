@@ -6,7 +6,7 @@ use Particle\Validator\Failure;
 
 class InvalidRequestException extends \Exception
 {
-    public function __construct(private readonly array $failures = [], private readonly ?string $identifier = null, $message = '')
+    public function __construct(private readonly array $failures = [], private readonly ?string $identifier = null, string $message = '')
     {
         parent::__construct($message, 400);
     }

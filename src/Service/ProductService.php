@@ -68,8 +68,8 @@ class ProductService
             $record = $product;
             $record->setCreatedAt(new \DateTimeImmutable());
         } else {
-            $record->setSku($product->getSku());
-            $record->setProductName($product->getProductName());
+            $record->setSku((string) $product->getSku());
+            $record->setProductName((string) $product->getProductName());
             $record->setDescription($product->getDescription());
             $record->setUpdatedAt(new \DateTimeImmutable());
         }
@@ -97,14 +97,14 @@ class ProductService
         $this->entityManager->beginTransaction();
         /** @var Product $product */
         foreach ($products as $product) {
-            $record = $this->findOneBySku($product->getSku());
+            $record = $this->findOneBySku((string) $product->getSku());
 
             if (is_null($record)) {
                 $record = $product;
                 $record->setCreatedAt(new \DateTimeImmutable());
             } else {
-                $record->setSku($product->getSku());
-                $record->setProductName($product->getProductName());
+                $record->setSku((string) $product->getSku());
+                $record->setProductName((string) $product->getProductName());
                 $record->setDescription($product->getDescription());
                 $record->setUpdatedAt(new \DateTimeImmutable());
             }

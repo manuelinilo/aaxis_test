@@ -33,6 +33,7 @@
     },
     "require-dev": {
         "phpspec/prophecy-phpunit": "*",
+        "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^10.5",
         "symfony/maker-bundle": "^1.52"
     },
