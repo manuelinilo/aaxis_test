@@ -1,25 +1,25 @@
 getProducts:
     path: /products
     methods: [GET]
-    controller: App\Controller\ProductController::index
+    controller: AaxisTest\Controller\ProductController::index
 
 getProduct:
     path: /products/{sku}
     methods: [GET]
-    controller: App\Controller\ProductController::show
+    controller: AaxisTest\Controller\ProductController::show
 
 createProduct:
     path: /products
     methods: [POST]
-    controller: App\Controller\ProductController::create
+    controller: AaxisTest\Controller\ProductController::create
 
 updateProducts:
     path: /products
     methods: [PUT]
-    controller: App\Controller\ProductController::update
+    controller: AaxisTest\Controller\ProductController::update
 
 updateProduct:
     path: /products/{sku}
     methods: [PUT]
-    controller: App\Controller\ProductController::updateOne
+    controller: AaxisTest\Controller\ProductController::updateOne
 

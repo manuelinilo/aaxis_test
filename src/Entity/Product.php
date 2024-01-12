@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Entity;
+namespace AaxisTest\Entity;
 
-use App\Repository\ProductRepository;
+use AaxisTest\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[ORM\Table(name:"products")]
 /**
  * @ORM\Entity(repositoryClass="ProductRepository")
  * @ORM\Table(name="products")
  */
 class Product
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"AUTO")]
-    #[ORM\Column]
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -24,13 +19,11 @@ class Product
      */
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
     /**
      * @ORM\Column(length=50)
      */
     private ?string $sku = null;
 
-    #[ORM\Column(length: 250)]
     /**
      * @ORM\Column(length=250)
      */
@@ -39,16 +32,13 @@ class Product
     /**
      * @ORM\Column(type="text")
      */
-    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
     /**
      * @ORM\Column
      */
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column(nullable: true)]
     /**
      * @ORM\Column
      */

@@ -8,7 +8,7 @@ security:
         in_memory:
             memory:
                 users:
-                    "%env(API_USER)%": { password: "%env(API_PASSWORD)%", roles: ['ROLE_ADMIN'] }
+                    "%env(API_USER)%": { password: "%env(API_PASSWORD_HASH)%", roles: ['ROLE_ADMIN'] }
 
     firewalls:
         dev:

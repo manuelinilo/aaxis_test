@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Service;
+namespace AaxisTest\Service;
 
-use App\Entity\Product;
-use App\Exception\InvalidEntityException;
-use App\Repository\ProductRepository;
+use AaxisTest\Entity\Product;
+use AaxisTest\Exception\InvalidEntityException;
+use AaxisTest\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProductService
@@ -34,6 +34,7 @@ class ProductService
      */
     public function create(array $products): bool
     {
+        $this->entityManager->beginTransaction();
         /** @var Product $product */
         foreach ($products as $product) {
             $product->setCreatedAt(new \DateTimeImmutable());
@@ -43,8 +44,11 @@ class ProductService
                 $this->entityManager->flush();
             } catch (\Exception $e) {
                 $error['error'] = [
-                    'sku' => $product->getSku()
+                    'sku' => $product->getSku(),
+                    'reason' => $e->getMessage()
                 ];
+
+                $this->entityManager->rollback();
 
                 throw new InvalidEntityException($error, $e->getMessage());
             }
@@ -64,8 +68,8 @@ class ProductService
             $record = $product;
             $record->setCreatedAt(new \DateTimeImmutable());
         } else {
-            $record->setSku($product->getSku());
-            $record->setProductName($product->getProductName());
+            $record->setSku((string) $product->getSku());
+            $record->setProductName((string) $product->getProductName());
             $record->setDescription($product->getDescription());
             $record->setUpdatedAt(new \DateTimeImmutable());
         }
@@ -75,7 +79,8 @@ class ProductService
             $this->entityManager->flush();
         } catch (\Exception $e) {
             $error['error'] = [
-                'sku' => $product->getSku()
+                'sku' => $product->getSku(),
+                'reason' => $e->getMessage()
             ];
 
             throw new InvalidEntityException($error, $e->getMessage());
@@ -92,14 +97,14 @@ class ProductService
         $this->entityManager->beginTransaction();
         /** @var Product $product */
         foreach ($products as $product) {
-            $record = $this->findOneBySku($product->getSku());
+            $record = $this->findOneBySku((string) $product->getSku());
 
             if (is_null($record)) {
                 $record = $product;
                 $record->setCreatedAt(new \DateTimeImmutable());
             } else {
-                $record->setSku($product->getSku());
-                $record->setProductName($product->getProductName());
+                $record->setSku((string) $product->getSku());
+                $record->setProductName((string) $product->getProductName());
                 $record->setDescription($product->getDescription());
                 $record->setUpdatedAt(new \DateTimeImmutable());
             }
@@ -109,7 +114,8 @@ class ProductService
                 $this->entityManager->flush();
             } catch (\Exception $e) {
                 $error['error'] = [
-                    'sku' => $product->getSku()
+                    'sku' => $product->getSku(),
+                    'reason' => $e->getMessage()
                 ];
 
                 $this->entityManager->rollback();

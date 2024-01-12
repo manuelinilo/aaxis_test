@@ -1,6 +1,13 @@
 {
+    "name": "manuelinilo/aaxis_test",
     "type": "project",
     "license": "proprietary",
+    "authors": [
+        {
+            "name": "Manuel Inilo",
+            "email": "manuel.inilo@gmail.com"
+        }
+    ],
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
@@ -24,6 +31,12 @@
         "symfony/serializer": "6.4.*",
         "symfony/yaml": "6.4.*"
     },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "*",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.5",
+        "symfony/maker-bundle": "^1.52"
+    },
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
@@ -34,12 +47,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "AaxisTest\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "AaxisTest\\Tests\\": "tests/"
         }
     },
     "replace": {
@@ -72,8 +85,5 @@
             "allow-contrib": false,
             "require": "6.4.*"
         }
-    },
-    "require-dev": {
-        "symfony/maker-bundle": "^1.52"
     }
 }
