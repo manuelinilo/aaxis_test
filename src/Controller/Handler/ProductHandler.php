@@ -92,7 +92,7 @@ class ProductHandler
         $result = $validator->validate($input);
 
         if ($result->isNotValid()) {
-            throw new InvalidRequestException($result->getFailures(), $input['sku']);
+            throw new InvalidRequestException($result->getFailures(), $input['sku'] ?? null);
         }
 
         $product = new Product();

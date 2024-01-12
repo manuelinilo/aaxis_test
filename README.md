@@ -29,7 +29,6 @@ symfony serve
 php bin/console cache:clear
 ```
 
-
 ## Details
 
 This project consist on a simple products API with follows API RESTful standards.

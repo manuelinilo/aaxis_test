@@ -31,6 +31,11 @@
         "symfony/serializer": "6.4.*",
         "symfony/yaml": "6.4.*"
     },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "*",
+        "phpunit/phpunit": "^10.5",
+        "symfony/maker-bundle": "^1.52"
+    },
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
@@ -79,8 +84,5 @@
             "allow-contrib": false,
             "require": "6.4.*"
         }
-    },
-    "require-dev": {
-        "symfony/maker-bundle": "^1.52"
     }
 }
